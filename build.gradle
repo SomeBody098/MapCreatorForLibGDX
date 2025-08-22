@@ -26,34 +26,25 @@ java {
     withJavadocJar()
 }
 
-test {
-    useJUnitPlatform()
-}
-
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
+            groupId group
+            artifactId 'gdx-mapcreator'
+            version version
+
             from components.java
-            artifactId = 'gdx-mapcreator'
+        }
+    }
 
-            pom {
-                name = 'Map Creator For LibGDX'
-                description = 'Map creator for LibGDX framework. Create game maps conveniently using a set of utilities!'
-                url = 'https://github.com/SomeBody098/MapCreatorForLibGDX.git'
+    repositories {
+        maven {
+            name = "MapCreatorForLibGDX"
+            url = uri("https://github.com/SomeBody098/MapCreatorForLibGDX.git")
 
-                licenses {
-                    license {
-                        name = 'MIT License'
-                        url = 'https://opensource.org/licenses/MIT'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'SomeBody098'
-                        name = 'SomeBody098'
-                    }
-                }
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
     }
