@@ -6,11 +6,6 @@ plugins {
 group = 'map.creator'
 version = '1.0.0'
 
-repositories {
-    mavenCentral()
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 dependencies {
     api "com.badlogicgames.gdx:gdx-box2d:1.13.1"
     api "com.badlogicgames.gdx:gdx-freetype:1.13.1"
