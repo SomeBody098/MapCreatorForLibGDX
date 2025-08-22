@@ -28,13 +28,13 @@ public class MapContainer implements Disposable {
 
     /**
      * Width map on pixels.
-     * For example: MAP_WIDTH_METERS = 10, PPM = 16 -> then MAP_WIDTH_PIXELS = 160 (MAP_WIDTH_METERS * PPM).
+     * For example: MAP_WIDTH_METERS = 10, PPM = 16 then MAP_WIDTH_PIXELS = 160 (MAP_WIDTH_METERS * PPM).
      */
     public final float MAP_WIDTH_PIXELS;
 
     /**
      * Height map on pixels.
-     * For example: MAP_HEIGHT_METERS = 10, PPM = 16 -> then MAP_HEIGHT_PIXELS = 160 (MAP_HEIGHT_METERS * PPM).
+     * For example: MAP_HEIGHT_METERS = 10, PPM = 16 then MAP_HEIGHT_PIXELS = 160 (MAP_HEIGHT_METERS * PPM).
      */
     public final float MAP_HEIGHT_PIXELS;
 

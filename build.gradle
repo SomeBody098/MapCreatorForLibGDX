@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'map.creator'
-version = '1.0-SNAPSHOT'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-box2d:1.13.1"
     api "com.badlogicgames.gdx:gdx-freetype:1.13.1"
     api "com.badlogicgames.gdx:gdx:1.13.1"
-    api "com.badlogicgames.ashley:ashley:1.7.0"
+    api "com.badlogicgames.ashley:ashley:1.7.4"
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -24,28 +24,4 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId group
-            artifactId 'gdx-mapcreator'
-            version version
-
-            from components.java
-        }
-    }
-
-    repositories {
-        maven {
-            name = "MapCreatorForLibGDX"
-            url = uri("https://github.com/SomeBody098/MapCreatorForLibGDX.git")
-
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-            }
-        }
-    }
 }

@@ -9,8 +9,7 @@ import map.creator.map.factory.body.UserData;
  * Processes all the {@link ContactDataComponent} that it sends {@link MapContactListener} on any contact.
  * <p><b>Usage Example:</b></p>
  * <pre>
- * {@code
- * @Override
+ * {@code @Override
  * public boolean beginContact(ContactDataComponent component, float deltaTime) {
  *     TileEntity AEntity = component.AEntity;
  *     TileEntity BEntity = component.BEntity;

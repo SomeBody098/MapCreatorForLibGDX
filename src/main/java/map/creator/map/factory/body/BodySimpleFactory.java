@@ -46,7 +46,7 @@ public class BodySimpleFactory {
      * @param def body settings (the position will be overwritten)
      * @param fixtureDef fixture settings
      * @param bounds circle that defines the shape and dimensions
-     * @param unitScale conversion scale pixels-to->meters
+     * @param unitScale conversion scale pixels-to-meters
      * @param userData user data for fixture
      * @return created circular body
      */
@@ -78,7 +78,7 @@ public class BodySimpleFactory {
      * @param def body settings (the position will be overwritten)
      * @param fixtureDef fixture settings
      * @param bounds rectangle that defines the shape and dimensions
-     * @param unitScale conversion scale pixels-to->meters
+     * @param unitScale conversion scale pixels-to-meters
      * @param userData user data for fixture
      * @return created rectangular body
      */

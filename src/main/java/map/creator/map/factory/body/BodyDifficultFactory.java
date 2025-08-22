@@ -25,7 +25,7 @@ import java.util.List;
  *
  * <p> <b> Features: </b> </p>
  * <ul>
- * <li> Automatic triangulation of complex landfills (> 8 peaks) </li>
+ * <li> Automatic triangulation of complex landfills (more 8 peaks) </li>
  * <li> support of ellipses through approximation by polygons </li>
  * <li> correct converting coordinates and scaling </li>
  * <li> Integration with the debugging system </li>
@@ -51,7 +51,7 @@ public class BodyDifficultFactory {
      * @param def body settings
      * @param fixtureDef fixture settings
      * @param bounds polygon defining the shape of the edge
-     * @param unitScale conversion scale pixels-to->meters
+     * @param unitScale conversion scale pixels-to-meters
      * @param userData user data for fixture
      * @return created body
      *
@@ -77,7 +77,7 @@ public class BodyDifficultFactory {
      * @param def body settings
      * @param fixtureDef fixture settings
      * @param bounds ellipse that defines the shape
-     * @param unitScale conversion scale pixels-to->meters
+     * @param unitScale conversion scale pixels-to-meters
      * @param userData user data for fixture
      * @return created body
      */
@@ -111,7 +111,7 @@ public class BodyDifficultFactory {
      * @param def body settings
      * @param fixtureDef fixture settings
      * @param bounds polygon that defines the shape
-     * @param unitScale conversion scale pixels-to->meters
+     * @param unitScale conversion scale pixels-to-meters
      * @param userData user data for fixture
      * @return created body
      *
@@ -144,7 +144,7 @@ public class BodyDifficultFactory {
      * @param fixtureDef fixture settings
      * @param isLooping, if true, creates a closed circuit
      * @param bounds polygon defining the vertices of the circuit
-     * @param unitScale conversion scale pixels-to->meters
+     * @param unitScale conversion scale pixels-to-meters
      * @param userData user data for fixture
      * @return created body
      */

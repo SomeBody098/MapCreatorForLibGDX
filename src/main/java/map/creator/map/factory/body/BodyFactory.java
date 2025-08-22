@@ -128,7 +128,7 @@ public class BodyFactory {
     /**
      * Sets the scale of the conversion.
      *
-     * @param unitScale new scale pixels->meters
+     * @param unitScale new scale pixels-meters
      */
     public void setUnitScale(float unitScale) {
         this.unitScale = unitScale;

@@ -37,7 +37,7 @@ public class BodyFactoryDebugger {
 
     /**
      * Print info about created shape.
-     * @param form The form shape (RECTANGLE, CIRCLE... -> learn more in {@link FormBody})
+     * @param form The form shape (RECTANGLE, CIRCLE... - learn more in {@link FormBody})
      * @param shape Bounds shape.
      * @param unitScale scale of the conversion.
      */
@@ -91,7 +91,7 @@ public class BodyFactoryDebugger {
 
     /**
      * Print info for created body.
-     * @param form The form shape (RECTANGLE, CIRCLE... -> learn more in {@link FormBody})
+     * @param form The form shape (RECTANGLE, CIRCLE... - learn more in {@link FormBody})
      * @param userData The {@link UserData} body
      * @param fixtureDef A fixture definition. {@link FixtureDef}
      * @param bodyDef A body definition. {@link BodyDef}

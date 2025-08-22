@@ -9,7 +9,6 @@ build/
 gradle-app.setting
 
 # local
-settings.gradle
 gradle.properties
 local.properties
 MapCreatorForLibGDX.iml
