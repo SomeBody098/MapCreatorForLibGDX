@@ -1,0 +1,15 @@
+# IDE
+.idea/
+*.iml
+src/main/java/map/creator/Main.java
+
+# Gradle
+.gradle/
+build/
+gradle-app.setting
+
+# local
+settings.gradle
+gradle.properties
+local.properties
+MapCreatorForLibGDX.iml
