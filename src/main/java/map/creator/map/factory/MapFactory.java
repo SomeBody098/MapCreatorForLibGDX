@@ -281,6 +281,73 @@ public class MapFactory implements AsynchronousFactory, Disposable {
         }
     }
 
+    public void createMap(String path, String... namesLayers){
+        if (isAsynchronousLoading) {
+            isDone = false;
+
+            manager.load(path, TiledMap.class);
+
+            loadingThread = new Thread(() -> {
+                try {
+                    while (!manager.update()) {
+                        Thread.sleep(100);
+                    }
+
+                    MapContainer map = new MapContainer(manager.get(path, TiledMap.class));
+
+                    syncCollisions(map, namesLayers);
+                    isDone = true;
+
+                } catch (Exception e) {
+                    loadingThread.interrupt();
+                    isFail = true;
+                    Gdx.app.log("MapFactory", "Been exception in " + Thread.currentThread().getName(), e);
+                } finally {
+                    isDone = true;
+                }
+
+                isDone = true;
+            });
+            loadingThread.setDaemon(true);
+            loadingThread.start();
+        } else {
+            TiledMap map = loader.load(path);
+            tiledMaps.put(path, map);
+            syncCollisions(new MapContainer(map), namesLayers);
+        }
+    }
+
+    public void createMap(String path, Rectangle zoneLoad, String... namesLayers){
+        if (isAsynchronousLoading) {
+            isDone = false;
+            loadingThread = new Thread(() -> {
+                manager.load(path, TiledMap.class);
+                while (!manager.update()) continue;
+
+                MapContainer map = new MapContainer(manager.get(path, TiledMap.class));
+
+                try {
+                    syncCollisions(map, zoneLoad, namesLayers);
+                    isDone = true;
+                } catch (Exception e){
+                    loadingThread.interrupt();
+                    isFail = true;
+                    Gdx.app.log("MapFactory", "Been exception in " + Thread.currentThread().getName(), e);
+                } finally {
+                    isDone = true;
+                }
+
+                isDone = true;
+            });
+            loadingThread.setDaemon(true);
+            loadingThread.start();
+        } else {
+            TiledMap map = loader.load(path);
+            tiledMaps.put(path, map);
+            syncCollisions(new MapContainer(map), zoneLoad, namesLayers);
+        }
+    }
+
     /**
      * Checks if the specified card is loaded.
      *
