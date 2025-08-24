@@ -284,21 +284,16 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     public void createMap(String path, String... namesLayers){
         if (isAsynchronousLoading) {
             isDone = false;
-
-            manager.load(path, TiledMap.class);
-
             loadingThread = new Thread(() -> {
+                manager.load(path, TiledMap.class);
+                while (!manager.update()) continue;
+
+                MapContainer map = new MapContainer(manager.get(path, TiledMap.class));
+
                 try {
-                    while (!manager.update()) {
-                        Thread.sleep(100);
-                    }
-
-                    MapContainer map = new MapContainer(manager.get(path, TiledMap.class));
-
                     syncCollisions(map, namesLayers);
                     isDone = true;
-
-                } catch (Exception e) {
+                } catch (Exception e){
                     loadingThread.interrupt();
                     isFail = true;
                     Gdx.app.log("MapFactory", "Been exception in " + Thread.currentThread().getName(), e);
