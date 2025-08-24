@@ -183,6 +183,17 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     }
 
     /**
+     * Creates collisions for all features in the specified layers.
+     *
+     * @param map container map
+     * @param namesLayers the names of the layers to be processed
+     * @throws IllegalArgumentException if namesLayers is empty or null
+     */
+    public void createCollisions(MapContainer map, String... namesLayers) {
+        createCollisions(map, null, namesLayers);
+    }
+
+    /**
      * Creates collisions for features in specified layers in a specific zone.
      *
      * @param map container map
@@ -196,7 +207,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
         }
 
         if (!isAsynchronousLoading) {
-            syncCollisions(map);
+            syncCollisions(map, zoneLoad);
             return;
         }
 
@@ -217,49 +228,9 @@ public class MapFactory implements AsynchronousFactory, Disposable {
         loadingThread.start();
     }
 
-    /**
-     * Creates collisions for all features in the specified layers.
-     *
-     * @param map container map
-     * @param namesLayers the names of the layers to be processed
-     * @throws IllegalArgumentException if namesLayers is empty or null
-     */
-    public void createCollisions(MapContainer map, String... namesLayers) {
-        if (namesLayers == null || namesLayers.length == 0) {
-            throw new IllegalArgumentException("\"namesLayers\" mustn't be empty! Please - write name layer, where contains some objects!");
-        }
-
-        if (!isAsynchronousLoading) {
-            syncCollisions(map);
-            return;
-        }
-
-        isDone = false;
-        loadingThread = new Thread(() -> {
-            try {
-                syncCollisions(map, namesLayers);
-                isDone = true;
-            } catch (Exception e){
-                loadingThread.interrupt();
-                isFail = true;
-                Gdx.app.log("MapFactory", "Been exception in " + Thread.currentThread().getName(), e);
-            } finally {
-                isDone = true;
-            }
-        });
-        loadingThread.setDaemon(true);
-        loadingThread.start();
-    }
-
-    private synchronized void syncCollisions(MapContainer map, String... namesLayers) {
-        for (String nameLayer : namesLayers) {
-            objectsFactory.createAllObjectsOnLayer(map, nameLayer);
-        }
-    }
-
     private synchronized void syncCollisions(MapContainer map, Rectangle zoneLoad, String... namesLayers) {
         for (String nameLayer : namesLayers) {
-            objectsFactory.createObjectsLocatedInZoneOnLayer(map, nameLayer, zoneLoad);
+            objectsFactory.createObjectsOnLayer(map, nameLayer, zoneLoad);
         }
     }
 
@@ -281,48 +252,38 @@ public class MapFactory implements AsynchronousFactory, Disposable {
         }
     }
 
+    /**
+     * Loading map and creating collision.
+     * @param path path to the .tmx file
+     * @param namesLayers the names of the layers to be processed
+     */
     public void createMap(String path, String... namesLayers){
-        if (isAsynchronousLoading) {
-            isDone = false;
-            loadingThread = new Thread(() -> {
-                manager.load(path, TiledMap.class);
-                while (!manager.update()) continue;
-
-                MapContainer map = new MapContainer(manager.get(path, TiledMap.class));
-
-                try {
-                    syncCollisions(map, namesLayers);
-                    isDone = true;
-                } catch (Exception e){
-                    loadingThread.interrupt();
-                    isFail = true;
-                    Gdx.app.log("MapFactory", "Been exception in " + Thread.currentThread().getName(), e);
-                } finally {
-                    isDone = true;
-                }
-
-                isDone = true;
-            });
-            loadingThread.setDaemon(true);
-            loadingThread.start();
-        } else {
-            TiledMap map = loader.load(path);
-            tiledMaps.put(path, map);
-            syncCollisions(new MapContainer(map), namesLayers);
-        }
+        createMap(path, null, namesLayers);
     }
 
+    /**
+     * Loading map and creating collision if they located in zoneLoad.
+     * @param path path to the .tmx file
+     * @param zoneLoad zone load - if some body will be containing in it then this body will be created.
+     * @param namesLayers the names of the layers to be processed
+     */
     public void createMap(String path, Rectangle zoneLoad, String... namesLayers){
         if (isAsynchronousLoading) {
             isDone = false;
+            manager.load(path, TiledMap.class);
+
             loadingThread = new Thread(() -> {
-                manager.load(path, TiledMap.class);
-                while (!manager.update()) continue;
-
-                MapContainer map = new MapContainer(manager.get(path, TiledMap.class));
-
                 try {
-                    syncCollisions(map, zoneLoad, namesLayers);
+                    while (!manager.update()) {
+                        Thread.yield();
+                    }
+
+                    syncCollisions(
+                            new MapContainer(manager.get(path, TiledMap.class)),
+                            zoneLoad,
+                            namesLayers
+                    );
+
                     isDone = true;
                 } catch (Exception e){
                     loadingThread.interrupt();

@@ -143,22 +143,10 @@ public class ObjectFactory implements Disposable {
      * @param nameLayer the name of the layer to be processed
      * @param zoneLoad zone for loading objects
      */
-    public synchronized void createObjectsLocatedInZoneOnLayer(MapContainer map, String nameLayer, Shape2D zoneLoad) {
+    public synchronized void createObjectsOnLayer(MapContainer map, String nameLayer, Shape2D zoneLoad) {
         MapObjects objects = map.getMapObjects(nameLayer);
         bodyFactory.setUnitScale(map.UNIT_SCALE);
         createObjects(objects, zoneLoad);
-    }
-
-    /**
-     * Creates all features on the specified map layer.
-     *
-     * @param map container map
-     * @param nameLayer the name of the layer to be processed
-     */
-    public synchronized void createAllObjectsOnLayer(MapContainer map, String nameLayer){
-        MapObjects objects = map.getMapObjects(nameLayer);
-        bodyFactory.setUnitScale(map.UNIT_SCALE);
-        createObjects(objects, null);
     }
 
     /**
@@ -166,7 +154,6 @@ public class ObjectFactory implements Disposable {
      *
      * @param objects objects array
      * @param zoneLoad There will be a check for the content of objects in this area, if they are contained, then they will be created, if not contained then not (if it not null).
-     * @return created game entity
      */
     private synchronized void createObjects(MapObjects objects, Shape2D zoneLoad){
         ArrayList<BodyParam> staticObjects = new ArrayList<>();
