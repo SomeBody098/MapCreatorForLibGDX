@@ -274,7 +274,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
 
             loadingThread = new Thread(() -> {
                 try {
-                    while (!manager.update()) {
+                    while (!manager.isLoaded(path)) {
                         Thread.yield();
                     }
 
