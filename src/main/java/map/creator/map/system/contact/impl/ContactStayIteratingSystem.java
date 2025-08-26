@@ -5,12 +5,21 @@ import map.creator.map.component.data.CleanComponent;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.component.data.ContactType;
 import map.creator.map.component.data.ContactTypeComponent;
+import map.creator.map.system.ObjectEntityFilter;
 import map.creator.map.system.contact.ContactIteratingSystem;
 import map.creator.map.utils.exception.UnexpectedBehaviorException;
 
 import java.util.Objects;
 
 public abstract class ContactStayIteratingSystem extends ContactIteratingSystem {
+
+    public ContactStayIteratingSystem() {
+        super();
+    }
+
+    public ContactStayIteratingSystem(ObjectEntityFilter filter) {
+        super(filter);
+    }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {

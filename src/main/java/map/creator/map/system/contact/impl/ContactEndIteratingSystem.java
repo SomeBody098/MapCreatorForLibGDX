@@ -5,6 +5,7 @@ import map.creator.map.component.data.CleanComponent;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.component.data.ContactType;
 import map.creator.map.component.data.ContactTypeComponent;
+import map.creator.map.system.ObjectEntityFilter;
 import map.creator.map.system.contact.ContactIteratingSystem;
 import map.creator.map.utils.exception.UnexpectedBehaviorException;
 
@@ -15,6 +16,14 @@ import java.util.Objects;
  * Only supports endContact method!
  */
 public abstract class ContactEndIteratingSystem extends ContactIteratingSystem {
+
+    public ContactEndIteratingSystem() {
+        super();
+    }
+
+    public ContactEndIteratingSystem(ObjectEntityFilter filter) {
+        super(filter);
+    }
 
     /**
      * The method determines the type of contact, as well as performs special actions if the result of the method <b>endContact</b> was true.
