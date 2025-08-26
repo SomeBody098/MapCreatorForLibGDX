@@ -25,31 +25,25 @@ jar {
     archiveBaseName = 'gdx-mapcreator'
     archiveVersion = '1.0.0'
 
-    // Включаем все скомпилированные классы
     from sourceSets.main.output
 
-    // Включаем ресурсы если есть
     from sourceSets.main.resources
 
-    // Важно: создаем fat jar со всеми зависимостями
     from {
         configurations.runtimeClasspath.collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
 
-    // Исключаем метаданные чтобы избежать конфликтов
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
-    // Убедимся что манифест есть
     manifest {
         attributes 'Implementation-Title': 'GDX Map Creator',
                 'Implementation-Version': archiveVersion
     }
 }
 
-// Отдельная задача для fat jar
 task fatJar(type: Jar) {
     archiveBaseName = 'gdx-mapcreator-full'
     archiveVersion = '1.0.0'
@@ -75,7 +69,6 @@ task exportJar(type: Jar) {
     include '**/*.class'
     include '**/*.properties'
 
-    // Включаем зависимости в JAR (fat jar)
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }

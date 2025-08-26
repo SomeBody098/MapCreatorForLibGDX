@@ -163,6 +163,8 @@ public class ObjectFactory implements Disposable {
             MapObject object = iterator.next();
             MapProperties properties = object.getProperties();
 
+            if (properties.get("data", Boolean.class) != null && properties.get("data", Boolean.class)) continue;
+            
             String nameObject = object.getName();
             String classObject = properties.get("type", String.class);
             String customForm = properties.get("form", String.class);

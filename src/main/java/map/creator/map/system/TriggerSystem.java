@@ -6,12 +6,13 @@ import map.creator.map.component.ObjectComponent;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.component.trigger.Trigger;
 import map.creator.map.factory.body.UserData;
+import map.creator.map.system.contact.impl.ContactFullIteratingSystem;
 import map.creator.map.utils.exception.UnexpectedBehaviorException;
 
 /**
  * Base system for working any triggers.
  */
-public class TriggerSystem extends ContactIteratingSystem {
+public class TriggerSystem extends ContactFullIteratingSystem {
 
     /**
      * First contact with trigger.

@@ -89,7 +89,7 @@ public class BodyParam{
         }
 
         /// Build BodyParam
-        /// @throws NotInitializedObjectException when "validate()" method returned false
+        /// @throws NotInitializedObjectException when "validateFilter()" method returned false
         public BodyParam build() {
             BodyParam param;
 

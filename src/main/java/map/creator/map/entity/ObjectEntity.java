@@ -2,9 +2,10 @@ package map.creator.map.entity;
 
 import com.badlogic.ashley.core.Entity;
 import map.creator.map.GameObject;
+import map.creator.map.system.contact.ContactSystem;
 
 /**
- * Base entity for all tile objects.
+ * Base entity for all game objects.
  */
 public class ObjectEntity extends Entity implements GameObject {
 
@@ -14,7 +15,7 @@ public class ObjectEntity extends Entity implements GameObject {
     protected final String name;
 
     /**
-     * Type of object, it is defined as the object will be created {@link map.creator.map.factory.object.ObjectCreator} and processed {@link map.creator.map.system.ContactSystem}
+     * Type of object, it is defined as the object will be created {@link map.creator.map.factory.object.ObjectCreator} and processed {@link ContactSystem}
      */
     protected final String type;
 
