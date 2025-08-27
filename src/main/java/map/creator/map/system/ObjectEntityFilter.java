@@ -22,6 +22,15 @@ import java.util.Set;
  * }
  * </pre>
  *
+ * <p>Or directly in the system constructor:</p>
+ * <pre>
+ * {@code
+ *  public NoteSystem() {
+ *         super(new ObjectEntityFilter("player", "note"));
+ *  }
+ * }
+ * </pre>
+ *
  * "ComponentFilter" will check all incoming entities and lock if they don't match the types in "entityTypes".
  * @see ContactIteratingSystem
  */
@@ -33,6 +42,7 @@ public class ObjectEntityFilter {
     public final Set<String> entityTypes;
 
     public ObjectEntityFilter(String... entityTypes) {
+        if (entityTypes == null || entityTypes.length == 0) throw new IllegalArgumentException("entityTypes cannot be null or empty!");
         this.entityTypes = new HashSet<>(Arrays.asList(entityTypes));
     }
 
