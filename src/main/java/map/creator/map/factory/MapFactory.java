@@ -216,6 +216,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
             try {
                 syncCollisions(map, zoneLoad, namesLayers);
                 isDone = true;
+                synchronizeEngineOnCacheObjects();
             } catch (Exception e){
                 loadingThread.interrupt();
                 isFail = true;
@@ -294,6 +295,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
                 }
 
                 isDone = true;
+                synchronizeEngineOnCacheObjects();
             });
             loadingThread.setDaemon(true);
             loadingThread.start();
@@ -342,8 +344,11 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     @Override
     public void dispose(){
         if (isAsynchronousLoading) {
-            loadingThread.interrupt();
-            loadingThread = null;
+            if (loadingThread != null) {
+                loadingThread.interrupt();
+                loadingThread = null;
+            }
+
             manager.dispose();
         } else {
             tiledMaps.clear();

@@ -215,8 +215,9 @@ public class ObjectFactory implements Disposable {
             }
 
             ObjectCreator creator = objectCreators.get(classObject);
+            nameObject = getAnotherNameIfThatExists(nameObject, cache.getEntityMap());
             cache.getEntityMap().put(
-                getAnotherNameIfThatExists(nameObject, cache.getEntityMap()),
+                    nameObject,
                 creator.createObject(
                     nameObject,
                     properties,
