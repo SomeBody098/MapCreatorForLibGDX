@@ -1,26 +1,24 @@
-package map.creator.map.system;
+package map.creator.map.system.contact.impl;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
 import map.creator.map.component.data.CleanComponent;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.component.data.ContactType;
 import map.creator.map.component.data.ContactTypeComponent;
+import map.creator.map.system.ObjectEntityFilter;
+import map.creator.map.system.contact.ContactIteratingSystem;
 
 /**
  * Abstract class to track contacts.
  */
-public abstract class ContactIteratingSystem extends IteratingSystem implements ContactSystem{
+public abstract class ContactFullIteratingSystem extends ContactIteratingSystem {
 
-    public ContactIteratingSystem() {
-        super(
-            Family.all(
-                ContactTypeComponent.class,
-                ContactDataComponent.class,
-                CleanComponent.class
-                ).get()
-        );
+    public ContactFullIteratingSystem() {
+        super();
+    }
+
+    public ContactFullIteratingSystem(ObjectEntityFilter filter) {
+        super(filter);
     }
 
     /**
@@ -30,6 +28,8 @@ public abstract class ContactIteratingSystem extends IteratingSystem implements 
      */
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        if (!validateFilter(entity)) return;
+
         ContactTypeComponent typeComponent = entity.getComponent(ContactTypeComponent.class);
         ContactDataComponent dataComponent = entity.getComponent(ContactDataComponent.class);
 

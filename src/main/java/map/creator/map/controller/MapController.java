@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
  * mapController.render(camera);
  *
  * // Render only specific layers by name
- * mapController.render(camera, new String[]{"ground", "buildings"});
+ * mapController.render(camera, "ground", "buildings");
  *
  * // Render only objects in a single layer
  * mapController.renderOneLayer(camera, "npcs");
@@ -76,7 +76,7 @@ public class MapController implements Disposable {
      * @param gameCamera the camera to use for rendering
      * @param layers an array of layer indices to render
      */
-    public void render(OrthographicCamera gameCamera, int[] layers){
+    public void render(OrthographicCamera gameCamera, int... layers){
         setGameCamera(gameCamera);
         renderer.render(layers);
     }
@@ -88,7 +88,7 @@ public class MapController implements Disposable {
      * @param gameCamera the camera to use for rendering
      * @param namesLayers an array of layer names to render
      */
-    public void render(OrthographicCamera gameCamera, String[] namesLayers){
+    public void render(OrthographicCamera gameCamera, String... namesLayers){
         setGameCamera(gameCamera);
         int[] layers = new int[namesLayers.length];
         IntStream.range(0, namesLayers.length).forEach(i -> layers[i] = map.getIndexLayerOnName(namesLayers[i]));

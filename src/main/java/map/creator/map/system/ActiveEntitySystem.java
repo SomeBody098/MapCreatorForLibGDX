@@ -4,8 +4,9 @@ import map.creator.map.component.body.BodyComponent;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.entity.ObjectEntity;
 import map.creator.map.factory.body.UserData;
+import map.creator.map.system.contact.impl.ContactFullIteratingSystem;
 
-public class ActiveEntitySystem extends ContactIteratingSystem {
+public class ActiveEntitySystem extends ContactFullIteratingSystem {
 
     @Override
     public boolean beginContact(ContactDataComponent component, float deltaTime) {

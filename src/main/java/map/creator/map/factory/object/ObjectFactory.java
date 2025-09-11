@@ -163,6 +163,8 @@ public class ObjectFactory implements Disposable {
             MapObject object = iterator.next();
             MapProperties properties = object.getProperties();
 
+            if (properties.get("data", Boolean.class) != null && properties.get("data", Boolean.class)) continue;
+            
             String nameObject = object.getName();
             String classObject = properties.get("type", String.class);
             String customForm = properties.get("form", String.class);
@@ -213,8 +215,9 @@ public class ObjectFactory implements Disposable {
             }
 
             ObjectCreator creator = objectCreators.get(classObject);
+            nameObject = getAnotherNameIfThatExists(nameObject, cache.getEntityMap());
             cache.getEntityMap().put(
-                getAnotherNameIfThatExists(nameObject, cache.getEntityMap()),
+                    nameObject,
                 creator.createObject(
                     nameObject,
                     properties,
@@ -348,12 +351,15 @@ public class ObjectFactory implements Disposable {
      */
     private synchronized String getAnotherNameIfThatExists(String currentName, Map<?, ?> map) {
         int count = 0;
-        while (map.containsKey(currentName)) {
-            currentName += count;
+        String anotherName = currentName;
+
+        while (map.containsKey(anotherName)) {
+            anotherName = currentName;
+            anotherName += count;
             count++;
         }
 
-        return currentName;
+        return anotherName;
     }
 
     @Override

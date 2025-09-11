@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Disposable;
 
 /**
  * This is a container for TileMap, which creates additional parameters and more convenient manipulation of the map.
- * It is still possible to obtain and use a clean TileMap.
  * Used in {@link MapController}.
  */
 public class MapContainer implements Disposable {

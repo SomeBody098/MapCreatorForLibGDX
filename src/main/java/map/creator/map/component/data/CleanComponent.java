@@ -2,7 +2,7 @@ package map.creator.map.component.data;
 
 import map.creator.map.component.ObjectComponent;
 
-/// Used to clear the dataComponents in class {@link map.creator.map.system.MapContactListener}
+/// Used to clear the contactDataComponents in class {@link map.creator.map.system.MapContactListener}
 /// @see map.creator.map.system.MapContactListener
 public class CleanComponent extends ObjectComponent {
 

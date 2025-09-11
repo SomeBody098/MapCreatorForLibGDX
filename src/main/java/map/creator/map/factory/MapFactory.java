@@ -190,6 +190,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
      * @throws IllegalArgumentException if namesLayers is empty or null
      */
     public void createCollisions(MapContainer map, String... namesLayers) {
+        rebootWorld();
         createCollisions(map, null, namesLayers);
     }
 
@@ -202,6 +203,8 @@ public class MapFactory implements AsynchronousFactory, Disposable {
      * @throws IllegalArgumentException if namesLayers is empty or null
      */
     public void createCollisions(MapContainer map, Rectangle zoneLoad, String... namesLayers) {
+        rebootWorld();
+
         if (namesLayers == null || namesLayers.length == 0) {
             throw new IllegalArgumentException("\"namesLayers\" mustn't be empty! Please - write name layer, where contains some objects!");
         }
@@ -216,6 +219,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
             try {
                 syncCollisions(map, zoneLoad, namesLayers);
                 isDone = true;
+                synchronizeEngineOnCacheObjects();
             } catch (Exception e){
                 loadingThread.interrupt();
                 isFail = true;
@@ -229,6 +233,8 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     }
 
     private synchronized void syncCollisions(MapContainer map, Rectangle zoneLoad, String... namesLayers) {
+        rebootWorld();
+
         for (String nameLayer : namesLayers) {
             objectsFactory.createObjectsOnLayer(map, nameLayer, zoneLoad);
         }
@@ -294,6 +300,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
                 }
 
                 isDone = true;
+                synchronizeEngineOnCacheObjects();
             });
             loadingThread.setDaemon(true);
             loadingThread.start();
@@ -336,14 +343,24 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     }
 
     /**
+     * Removes ALL bodies from the world - called automatically if you to create new collisions for {@link TiledMap}.
+     */
+    public void rebootWorld(){
+        objectsFactory.getBodyFactory().reboot();
+    }
+
+    /**
      * Frees up resources and stops background threads.
      * <p><b>REQUIRED TO BE CALLED WHEN THE APPLICATION IS TERMINATED!</b></p>
      */
     @Override
     public void dispose(){
         if (isAsynchronousLoading) {
-            loadingThread.interrupt();
-            loadingThread = null;
+            if (loadingThread != null) {
+                loadingThread.interrupt();
+                loadingThread = null;
+            }
+
             manager.dispose();
         } else {
             tiledMaps.clear();

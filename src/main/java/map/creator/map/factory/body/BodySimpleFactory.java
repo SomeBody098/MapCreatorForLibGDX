@@ -87,8 +87,6 @@ public class BodySimpleFactory {
         float centerY = (bounds.y + bounds.height / 2) * unitScale;
         def.position.set(centerX, centerY);
 
-        Gdx.app.log("ggg", bounds.toString());
-
         Body body = world.createBody(def);
 
         PolygonShape shape = createRectangleShape(bounds, body.getPosition(), unitScale);
