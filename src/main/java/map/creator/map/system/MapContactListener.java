@@ -29,16 +29,41 @@ public class MapContactListener implements ContactListener {
 
     protected final Engine engine;
     protected final Pool<Entity> entityPool;
-    protected final Map<String, Entity> dataComponents;
+    protected final Map<String, Entity> contactDataComponents;
 
     protected final Map<String, Integer> activeContacts = new HashMap<>();
 
     protected final ObjectCache objectsCache;
 
+    protected boolean isDebug;
+
     public MapContactListener(Engine engine, ObjectCache objectsCache) {
         this.engine = engine;
         this.objectsCache = objectsCache;
-        dataComponents = new HashMap<>();
+        contactDataComponents = new HashMap<>();
+
+        entityPool = new Pool<Entity>() {
+            @Override
+            protected Entity newObject() {
+                return new Entity();
+            }
+        };
+        isDebug = false;
+    }
+
+    public MapContactListener(Engine engine, Pool<Entity> entityPool, Map<String, Entity> dataComponents, ObjectCache objectsCache) {
+        this.engine = engine;
+        this.entityPool = entityPool;
+        this.contactDataComponents = dataComponents;
+        this.objectsCache = objectsCache;
+        isDebug = false;
+    }
+
+    public MapContactListener(Engine engine, ObjectCache objectsCache, boolean isDebug) {
+        this.engine = engine;
+        this.objectsCache = objectsCache;
+        this.isDebug = isDebug;
+        contactDataComponents = new HashMap<>();
 
         entityPool = new Pool<Entity>() {
             @Override
@@ -48,11 +73,20 @@ public class MapContactListener implements ContactListener {
         };
     }
 
-    public MapContactListener(Engine engine, Pool<Entity> entityPool, HashMap<String, Entity> dataComponents, ObjectCache objectsCache) {
+    public MapContactListener(Engine engine, Pool<Entity> entityPool, Map<String, Entity> dataComponents, ObjectCache objectsCache, boolean isDebug) {
         this.engine = engine;
         this.entityPool = entityPool;
-        this.dataComponents = dataComponents;
+        this.contactDataComponents = dataComponents;
         this.objectsCache = objectsCache;
+        this.isDebug = isDebug;
+    }
+
+    public boolean isDebug() {
+        return isDebug;
+    }
+
+    public void setDebug(boolean debug) {
+        isDebug = debug;
     }
 
     /**
@@ -71,7 +105,7 @@ public class MapContactListener implements ContactListener {
         UserData userDataB = getUserData(fixtureB);
         if (userDataA == null || userDataB == null) return;
 
-        Gdx.app.log("contact", userDataA + " " + userDataB);
+        if (isDebug) Gdx.app.log("beginContact", userDataA + " " + userDataB);
 
         ObjectEntity entityA = getEntity(userDataA);
         ObjectEntity entityB = getEntity(userDataB);
@@ -94,6 +128,8 @@ public class MapContactListener implements ContactListener {
         UserData userDataA = getUserData(fixtureA);
         UserData userDataB = getUserData(fixtureB);
         if (userDataA == null || userDataB == null) return;
+
+        if (isDebug) Gdx.app.log("endContact", userDataA + " " + userDataB);
 
         handlerEnd(userDataA, userDataB);
     }
@@ -139,7 +175,7 @@ public class MapContactListener implements ContactListener {
                 .add(new ContactDataComponent(contact, entityA, entityB, userDataA, userDataB));
 
         engine.addEntity(entity);
-        dataComponents.put(name, entity);
+        contactDataComponents.put(name, entity);
     }
 
     /**
@@ -156,7 +192,7 @@ public class MapContactListener implements ContactListener {
             Integer integer = activeContacts.get(name);
 
             if (integer == 0) {
-                dataComponents.get(name).getComponent(ContactTypeComponent.class).type = ContactType.END;
+                contactDataComponents.get(name).getComponent(ContactTypeComponent.class).type = ContactType.END;
             }
         }
     }
@@ -166,9 +202,9 @@ public class MapContactListener implements ContactListener {
      * If cleanComponent.isMustBeDelete == true, then object going to delete.
      */
     protected final void clearDataComponent() {
-        if (dataComponents.isEmpty()) return;
+        if (contactDataComponents.isEmpty()) return;
 
-        Iterator<Map.Entry<String, Entity>> iterator = dataComponents.entrySet().iterator();
+        Iterator<Map.Entry<String, Entity>> iterator = contactDataComponents.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, Entity> entry = iterator.next();
             Entity entity = entry.getValue();

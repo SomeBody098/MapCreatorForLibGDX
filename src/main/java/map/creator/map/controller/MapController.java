@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
  * mapController.render(camera);
  *
  * // Render only specific layers by name
- * mapController.render(camera, new String[]{"ground", "buildings"});
+ * mapController.render(camera, "ground", "buildings");
  *
  * // Render only objects in a single layer
  * mapController.renderOneLayer(camera, "npcs");

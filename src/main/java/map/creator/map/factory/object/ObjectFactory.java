@@ -351,12 +351,15 @@ public class ObjectFactory implements Disposable {
      */
     private synchronized String getAnotherNameIfThatExists(String currentName, Map<?, ?> map) {
         int count = 0;
-        while (map.containsKey(currentName)) {
-            currentName += count;
+        String anotherName = currentName;
+
+        while (map.containsKey(anotherName)) {
+            anotherName = currentName;
+            anotherName += count;
             count++;
         }
 
-        return currentName;
+        return anotherName;
     }
 
     @Override

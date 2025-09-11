@@ -190,6 +190,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
      * @throws IllegalArgumentException if namesLayers is empty or null
      */
     public void createCollisions(MapContainer map, String... namesLayers) {
+        rebootWorld();
         createCollisions(map, null, namesLayers);
     }
 
@@ -202,6 +203,8 @@ public class MapFactory implements AsynchronousFactory, Disposable {
      * @throws IllegalArgumentException if namesLayers is empty or null
      */
     public void createCollisions(MapContainer map, Rectangle zoneLoad, String... namesLayers) {
+        rebootWorld();
+
         if (namesLayers == null || namesLayers.length == 0) {
             throw new IllegalArgumentException("\"namesLayers\" mustn't be empty! Please - write name layer, where contains some objects!");
         }
@@ -230,6 +233,8 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     }
 
     private synchronized void syncCollisions(MapContainer map, Rectangle zoneLoad, String... namesLayers) {
+        rebootWorld();
+
         for (String nameLayer : namesLayers) {
             objectsFactory.createObjectsOnLayer(map, nameLayer, zoneLoad);
         }
@@ -335,6 +340,13 @@ public class MapFactory implements AsynchronousFactory, Disposable {
 
     private void validateAsynchronous(){
         if (!isAsynchronousLoading) throw new IllegalArgumentException("\"isAsynchronousLoading\" - false. The MapFactory is not worked in asynchronous mode.");
+    }
+
+    /**
+     * Removes ALL bodies from the world - called automatically if you to create new collisions for {@link TiledMap}.
+     */
+    public void rebootWorld(){
+        objectsFactory.getBodyFactory().reboot();
     }
 
     /**
