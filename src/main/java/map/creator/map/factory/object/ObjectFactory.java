@@ -87,6 +87,14 @@ public class ObjectFactory implements Disposable {
         this.cache = cache;
     }
 
+    /**
+     * Sets debug (Logs of object creation will appear).
+     * @param debug if true - BodyFactory will debug
+     */
+    public void setDebug(boolean debug) {
+        bodyFactory.setDebug(debug);
+    }
+
     public ObjectCache getCache() {
         return cache;
     }

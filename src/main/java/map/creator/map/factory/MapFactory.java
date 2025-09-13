@@ -102,6 +102,15 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     }
 
     /**
+     * Sets debug (Logs of object creation will appear).
+     * @param debug if true - BodyFactory will debug
+     */
+    public void setDebug(boolean debug) {
+        objectsFactory.setDebug(debug);
+    }
+
+
+    /**
      * Checks for the completion of asynchronous boot operations.
      *
      * @return true if all operations are completed successfully
