@@ -73,6 +73,8 @@ import java.util.HashMap;
  */
 public class MapFactory implements AsynchronousFactory, Disposable {
 
+    private final Engine engine;
+
     private final HashMap<String, TiledMap> tiledMaps;
     private final TmxMapLoader loader;
 
@@ -85,6 +87,7 @@ public class MapFactory implements AsynchronousFactory, Disposable {
     private final boolean isAsynchronousLoading;
 
     public MapFactory(World world, Engine engine, boolean isAsynchronousLoading) {
+        this.engine = engine;
         this.isAsynchronousLoading = isAsynchronousLoading;
 
         if (isAsynchronousLoading) {
@@ -356,6 +359,8 @@ public class MapFactory implements AsynchronousFactory, Disposable {
      */
     public void rebootWorld(){
         objectsFactory.getBodyFactory().reboot();
+        objectsFactory.clearCache();
+        engine.removeAllEntities();
     }
 
     /**
