@@ -1,13 +1,10 @@
 package map.creator.map.factory.body;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.Ellipse;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+
+import java.util.Arrays;
 
 /**
  * The debugger for {@link BodyFactory}, {@link BodySimpleFactory} and {@link BodyDifficultFactory}.
@@ -36,58 +33,49 @@ public class BodyFactoryDebugger {
     }
 
     /**
-     * Print info about created shape.
+     * Print info about created shape in {@link BodySimpleFactory}.
+     * @param x location of the shape by X coordinate
+     * @param y location of the shape by Y coordinate
+     * @param width width of shape
+     * @param height height of shape
      * @param form The form shape (RECTANGLE, CIRCLE... - learn more in {@link FormBody})
-     * @param shape Bounds shape.
-     * @param unitScale scale of the conversion.
      */
-    public void debugPrintAboutShape(FormBody form, Shape2D shape, float unitScale){
+    public void debugPrintAboutSimpleShape(float x, float y, float width, float height, FormBody form){
         if (!isDebug) return;
 
         switch (form){
             case CIRCLE:
-                Circle circle = (Circle) shape;
-                circle.set(circle.x * unitScale, circle.y * unitScale, circle.radius / 2 * unitScale);
-
                 Gdx.app.log("BodyFactory",
-                    String.format("Shape was created! Form: %s, Bounds: %s", form.name(), circle)
+                    String.format("Shape was created! Form: %s, Bounds: %s", form.name(), "[" + x + "," + y + "," + width + "]")
                 );
                 return;
             case RECTANGLE:
-                Rectangle rectangle = (Rectangle) shape;
-                rectangle.set(rectangle.x * unitScale, rectangle.y * unitScale, rectangle.width / 2 * unitScale, rectangle.height / 2 * unitScale);
-
-                Gdx.app.log("BodyFactory",
-                    String.format("Shape was created! Form: %s, Bounds: %s", form.name(), rectangle)
-                );
-                return;
             case ELLIPSE:
-                Ellipse ellipse = (Ellipse) shape;
-                ellipse.set(ellipse.x * unitScale, ellipse.y * unitScale, ellipse.width / 2 * unitScale, ellipse.height / 2 * unitScale);
-
                 Gdx.app.log("BodyFactory",
                     String.format("Shape was created! Form: %s, Bounds: %s",
                         form.name(),
-                        "[" + ellipse.x + "," + ellipse.y + "," + ellipse.width + "," + ellipse.height + "]"
+                        "[" + x + "," + y + "," + width + "," + height + "]"
                     )
                 );
-                return;
-            case CHAIN:
-                Polygon polygon = (Polygon) shape;
-
-                Gdx.app.log("BodyFactory",
-                    String.format("Shape was created! Form: %s, Bounds: [x: %s], [y: %s], [area: %s]",
-                        form.name(),
-                        polygon.getX() * unitScale,
-                        polygon.getY() * unitScale,
-                        polygon.area() * unitScale
-                    )
-                );
-                return;
-            case EDGE:
-                Gdx.app.log("BodyFactory", "https://youtu.be/dQw4w9WgXcQ?si=7Jk3XXtue7P64M5p");
         }
     }
+
+    /**
+     * Print info about created shape in {@link BodyDifficultFactory}.
+     * @param transformVertices all vertices of the hard shape
+     * @param form The form shape (RECTANGLE, CIRCLE... - learn more in {@link FormBody})
+     */
+    public void debugPrintAboutDifficultShape(float[] transformVertices, FormBody form){
+        Gdx.app.log(
+                "BodyFactory",
+                String.format(
+                        "Shape was created! Form: %s, Vertices: [%s]",
+                        form.name(), Arrays.toString(transformVertices)
+                )
+        );
+    }
+
+
 
     /**
      * Print info for created body.

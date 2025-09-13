@@ -122,7 +122,7 @@ public class BodySimpleFactory {
         circleShape.setRadius(hr);
         circleShape.setPosition(new Vector2(centerX, centerY));
 
-        debugger.debugPrintAboutShape(FormBody.CIRCLE, circle, unitScale);
+        debugger.debugPrintAboutSimpleShape(centerX, centerY, hr, hr, FormBody.CIRCLE);
 
         return circleShape;
     }
@@ -145,7 +145,7 @@ public class BodySimpleFactory {
 
         polygonShape.setAsBox(hx, hy, new Vector2(centerX, centerY), 0);
 
-        debugger.debugPrintAboutShape(FormBody.RECTANGLE, rectangle, unitScale);
+        debugger.debugPrintAboutSimpleShape(centerX, centerY, hx, hy, FormBody.RECTANGLE);
 
         return polygonShape;
     }

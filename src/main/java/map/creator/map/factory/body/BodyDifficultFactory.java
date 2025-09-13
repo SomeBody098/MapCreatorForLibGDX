@@ -186,7 +186,7 @@ public class BodyDifficultFactory {
         EdgeShape edgeShape = new EdgeShape();
         edgeShape.set(vertices[0], vertices[1], vertices[2], vertices[4]);
 
-        debugger.debugPrintAboutShape(FormBody.EDGE, polygon, unitScale);
+        debugger.debugPrintAboutDifficultShape(vertices, FormBody.EDGE);
 
         return edgeShape;
     }
@@ -213,6 +213,8 @@ public class BodyDifficultFactory {
             vertices[i * 2 + 1] = y;
         }
 
+        debugger.debugPrintAboutDifficultShape(vertices, FormBody.POLYGON);
+
         return computeTriangles(vertices);
     }
 
@@ -227,7 +229,10 @@ public class BodyDifficultFactory {
      */
     public PolygonShape[] createPolygonShapes(Polygon polygon, Vector2 center, float unitScale) {
         float[] transformVertices = getTransformedVerticesOnUnitScale(polygon.getTransformedVertices(), center, unitScale);
-        return computeTriangles(transformVertices);
+        PolygonShape[] polygonShapes = computeTriangles(transformVertices);
+
+        debugger.debugPrintAboutDifficultShape(transformVertices, FormBody.POLYGON);
+        return polygonShapes;
     }
 
     /**
@@ -246,7 +251,7 @@ public class BodyDifficultFactory {
         if (isLooping) shape.createLoop(transformVertices);
         else shape.createChain(transformVertices);
 
-        debugger.debugPrintAboutShape(FormBody.CHAIN, polygon, unitScale);
+        debugger.debugPrintAboutDifficultShape(transformVertices, FormBody.CHAIN);
 
         return shape;
     }
