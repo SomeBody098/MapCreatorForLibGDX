@@ -144,6 +144,8 @@ public class BodyFactory {
         Array<Body> bodies = new Array<>();
         world.getBodies(bodies);
 
+        if (bodies.isEmpty()) return;
+
         Arrays.stream(bodies.items).forEach(world::destroyBody);
     }
 
