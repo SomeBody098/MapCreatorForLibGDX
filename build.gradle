@@ -7,10 +7,10 @@ group = 'map.creator'
 version = '1.0.0'
 
 dependencies {
-    api "com.badlogicgames.gdx:gdx-box2d:1.13.1"
-    api "com.badlogicgames.gdx:gdx-freetype:1.13.1"
-    api "com.badlogicgames.gdx:gdx:1.13.1"
-    api "com.badlogicgames.ashley:ashley:1.7.4"
+    compileOnly "com.badlogicgames.gdx:gdx-box2d:1.13.1"
+    compileOnly "com.badlogicgames.gdx:gdx-freetype:1.13.1"
+    compileOnly "com.badlogicgames.gdx:gdx:1.13.1"
+    compileOnly "com.badlogicgames.ashley:ashley:1.7.4"
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'

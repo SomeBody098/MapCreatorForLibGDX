@@ -2,12 +2,10 @@
 
 **MapCreatorForLibGDX** is a rather flexible tool for creating game entities in LibGDX using .tmx files. 
 
-To begin with, I want to inform you that **MapCreatorForLibGDX** uses the following libraries: 
+To get started, you need to make sure that you have imported the following:
 1) com.badlogicgames.ashley:ashley,
 2) com.badlogicgames.gdx:gdx-box2d,
 3) com.badlogicgames.gdx:gdx
-
-All of them are ALREADY CONNECTED to MapCreator, so disable these libraries in your project in order to avoid their contact with each other.
 
 Also - please check your .tmx or .tsx files for the presence of fields where the "Class" field is present. It needs to be replaced with the "type" field, since due to the peculiarities of LibGDX, the "class" field is simply not parsed.
 To replace all "class" with "type" at once, you can use this simple code:
