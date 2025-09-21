@@ -1,0 +1,5 @@
+This product includes software from the following projects:
+
+- Box2D (http://box2d.org/), developed by Erin Catto, licensed under the zlib License.
+- Ashley (https://github.com/libgdx/ashley), licensed under the Apache License, Version 2.0.
+- LibGDX (https://libgdx.com/), licensed under the Apache License, Version 2.0.
