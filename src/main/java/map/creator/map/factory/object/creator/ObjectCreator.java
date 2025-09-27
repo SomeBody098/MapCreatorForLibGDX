@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Shape2D;
 import map.creator.map.entity.ObjectEntity;
 import map.creator.map.factory.body.BodyFactory;
-import map.creator.map.factory.body.FormBody;
+import map.creator.map.factory.body.param.FormBody;
 
 import java.util.Map;
 

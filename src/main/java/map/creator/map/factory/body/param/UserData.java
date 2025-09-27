@@ -1,4 +1,4 @@
-package map.creator.map.factory.body;
+package map.creator.map.factory.body.param;
 
 /**
  * A class for storing user data associated with physical objects (e.g. Fixture in Box2D).

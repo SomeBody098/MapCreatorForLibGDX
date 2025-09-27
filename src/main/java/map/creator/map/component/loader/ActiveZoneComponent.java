@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import map.creator.map.component.ObjectComponent;
-import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.body.param.UserData;
 
 /// Contains and generates a fixture - a zone for enabling activity on entity's in {@link com.badlogic.ashley.core.Engine} and on dynamic body's in Box2D.
 /// All {@link Body}'s, which will be contacted ActiveZone, will be get up

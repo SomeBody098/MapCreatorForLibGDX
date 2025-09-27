@@ -15,7 +15,7 @@ import map.creator.map.component.data.ContactType;
 import map.creator.map.component.data.ContactTypeComponent;
 import map.creator.map.entity.ObjectEntity;
 import map.creator.map.factory.object.ObjectCache;
-import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.body.param.UserData;
 
 import java.util.HashMap;
 import java.util.Iterator;

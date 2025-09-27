@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import map.creator.map.component.ObjectComponent;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.component.trigger.Trigger;
-import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.body.param.UserData;
 import map.creator.map.system.contact.impl.ContactFullIteratingSystem;
 import map.creator.map.utils.exception.UnexpectedBehaviorException;
 

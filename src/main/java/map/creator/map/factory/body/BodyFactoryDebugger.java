@@ -3,6 +3,8 @@ package map.creator.map.factory.body;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import map.creator.map.factory.body.param.FormBody;
+import map.creator.map.factory.body.param.UserData;
 
 import java.util.Arrays;
 

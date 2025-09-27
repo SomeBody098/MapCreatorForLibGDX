@@ -3,7 +3,7 @@ package map.creator.map.system.contact;
 import map.creator.map.component.data.ContactDataComponent;
 import map.creator.map.component.data.ContactType;
 import map.creator.map.entity.ObjectEntity;
-import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.body.param.UserData;
 import map.creator.map.system.MapContactListener;
 
 /**

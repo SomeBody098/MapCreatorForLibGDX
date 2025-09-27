@@ -3,7 +3,7 @@ package map.creator.map.component.data;
 import com.badlogic.gdx.physics.box2d.Contact;
 import map.creator.map.component.ObjectComponent;
 import map.creator.map.entity.ObjectEntity;
-import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.body.param.UserData;
 
 /// A class that contains the state of a contact
 /// @see ContactType

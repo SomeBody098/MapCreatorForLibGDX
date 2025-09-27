@@ -1,8 +1,9 @@
-package map.creator.map.factory.body;
+package map.creator.map.factory.body.param;
 
 import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import map.creator.map.factory.body.BodyFactory;
 import map.creator.map.utils.exception.NotInitializedObjectException;
 
 /// <i>BodyParam</i> - it is instruction for creating some body for object.

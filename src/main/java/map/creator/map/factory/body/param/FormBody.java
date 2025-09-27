@@ -1,4 +1,6 @@
-package map.creator.map.factory.body;
+package map.creator.map.factory.body.param;
+
+import map.creator.map.factory.body.BodyFactory;
 
 /**
  * Sets form body for object.

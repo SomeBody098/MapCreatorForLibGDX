@@ -25,9 +25,9 @@ import map.creator.map.component.body.BodyComponent;
 import map.creator.map.controller.MapContainer;
 import map.creator.map.entity.ObjectEntity;
 import map.creator.map.factory.body.BodyFactory;
-import map.creator.map.factory.body.BodyParam;
-import map.creator.map.factory.body.FormBody;
-import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.body.param.BodyParam;
+import map.creator.map.factory.body.param.FormBody;
+import map.creator.map.factory.body.param.UserData;
 import map.creator.map.factory.object.creator.ObjectCreator;
 
 import java.util.ArrayList;
