@@ -28,6 +28,7 @@ import map.creator.map.factory.body.BodyFactory;
 import map.creator.map.factory.body.BodyParam;
 import map.creator.map.factory.body.FormBody;
 import map.creator.map.factory.body.UserData;
+import map.creator.map.factory.object.creator.ObjectCreator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,41 +176,39 @@ public class ObjectFactory implements Disposable {
             
             String nameObject = object.getName();
             String classObject = properties.get("type", String.class);
-            String customForm = properties.get("form", String.class);
 
             if (classObject == null) {
                 Gdx.app.error("ObjectsFactory", "Imposable create TileObject because it type is null!", new NullPointerException());
                 return;
             }
 
-            FormBody defaultForm;
+            FormBody formBody;
             Shape2D boundsObject;
             if (object instanceof RectangleMapObject) {
                 boundsObject = ((RectangleMapObject) object).getRectangle();
-                defaultForm = FormBody.RECTANGLE;
+                formBody = FormBody.RECTANGLE;
 
             } else if (object instanceof CircleMapObject) {
                 boundsObject = ((CircleMapObject) object).getCircle();
-                defaultForm = FormBody.CIRCLE;
+                formBody = FormBody.CIRCLE;
 
             } else if (object instanceof EllipseMapObject) {
                 boundsObject = ((EllipseMapObject) object).getEllipse();
-                defaultForm = FormBody.ELLIPSE;
+                formBody = FormBody.ELLIPSE;
 
             } else if (object instanceof PolylineMapObject) {
                 boundsObject = ((PolylineMapObject) object).getPolyline();
-                defaultForm = FormBody.CHAIN;
+                formBody = FormBody.CHAIN;
 
             } else if (object instanceof PolygonMapObject) {
                 boundsObject = ((PolygonMapObject) object).getPolygon();
-                defaultForm = FormBody.POLYGON;
+                formBody = FormBody.POLYGON;
 
             } else {
                 Gdx.app.error("ObjectsFactory", "Shape object not found. The object - " + nameObject, new IllegalArgumentException());
                 continue;
             }
 
-            FormBody formBody = customForm == null ? defaultForm : FormBody.getFormBodyOnString(customForm);
             if (zoneLoad != null && isObjectContainsInZone(zoneLoad, formBody, boundsObject)) continue;
 
             if (classObject.equals("static")) {
@@ -304,7 +303,7 @@ public class ObjectFactory implements Disposable {
      * @return created game entity
      */
     public ObjectEntity createObject(BodyParam param) {
-        Body body = bodyFactory.createCollision(param);
+        Body body = bodyFactory.createBody(param);
 
         ObjectEntity tileEntity = new ObjectEntity(param.userData.name, param.userData.type);
         tileEntity.add(new BodyComponent(body, tileEntity.getName()));

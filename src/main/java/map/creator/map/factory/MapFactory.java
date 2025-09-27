@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import map.creator.map.controller.MapContainer;
-import map.creator.map.factory.object.ObjectCreator;
+import map.creator.map.factory.object.creator.ObjectCreator;
 import map.creator.map.factory.object.ObjectFactory;
 import map.creator.map.utils.exception.NotInitializedObjectException;
 

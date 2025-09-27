@@ -15,7 +15,6 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,15 +51,11 @@ import java.util.List;
  *     .bodyDef(bodyDef)
  *     .fixtureDef(fixtureDef)
  *     .bounds(new Rectangle(10, 10, 32, 32))
- *     .userData(new UserData("player", "dynamic", null))
+ *     .userData(new UserData("murder", "enemy", null))
  *     .build();
  *
  * // Creation of the body
- * Body body = factory.createCollision(param);
- *
- * // Creating a Composite Body from Multiple Shapes
- * List<BodyParam> params = Arrays.asList(param1, param2, param3);
- * Body compoundBody = factory.createCollisionsUnderOneBody(params);
+ * Body body = factory.createBody(param);
  * }
  * </pre>
  *
@@ -235,7 +230,7 @@ public class BodyFactory {
      * @return created Box2D body
      * @throws IllegalArgumentException if an unknown form is specified
      */
-    public Body createCollision(BodyParam param){
+    public Body createBody(BodyParam param){
         switch (param.formBody){
             case RECTANGLE:
                 return simpleFactory.createRectangleBody(

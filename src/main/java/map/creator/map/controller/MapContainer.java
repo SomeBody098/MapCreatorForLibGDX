@@ -66,7 +66,7 @@ public class MapContainer implements Disposable {
         int tileWidth = map.getProperties().get("tilewidth", Integer.class);
         int tileHeight = map.getProperties().get("tileheight", Integer.class);
 
-        if (!(tileWidth == tileHeight)) throw new IllegalArgumentException("Width and height tile is different.");
+        if (tileWidth != tileHeight) throw new IllegalArgumentException("Width and height tile is different.");
         PPM = tileWidth;
         UNIT_SCALE = 1f / PPM;
 

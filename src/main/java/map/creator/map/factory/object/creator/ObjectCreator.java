@@ -1,4 +1,4 @@
-package map.creator.map.factory.object;
+package map.creator.map.factory.object.creator;
 
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.Shape2D;
@@ -15,7 +15,7 @@ public interface ObjectCreator {
 
     /**
      * Used for creating a special entity.
-     * WARNING: Do not load textures, sounds, or other source require OpenGL calls (learn more - https://libgdx.com/wiki/app/threading).
+     * <b>WARNING:</b> Do not load textures, sounds, or other source require OpenGL calls (learn more - https://libgdx.com/wiki/app/threading).
      * It is better to download yourself in advance or via {@link com.badlogic.gdx.assets.AssetManager} and use DI (Dependency injection).
      * <p><b>Example:</b></p>
      * <pre>
