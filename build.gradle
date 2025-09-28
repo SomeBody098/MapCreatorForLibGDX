@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'map.creator'
-version = '1.0.0'
+version = '2.0.0'
 
 dependencies {
     compileOnly "com.badlogicgames.gdx:gdx-box2d:1.13.1"
@@ -23,7 +23,7 @@ java {
 
 jar {
     archiveBaseName = 'gdx-mapcreator'
-    archiveVersion = '1.0.0'
+    archiveVersion = version
 
     from sourceSets.main.output
 
@@ -46,7 +46,7 @@ jar {
 
 task fatJar(type: Jar) {
     archiveBaseName = 'gdx-mapcreator-full'
-    archiveVersion = '1.0.0'
+    archiveVersion = version
 
     from sourceSets.main.output
     from sourceSets.main.resources
@@ -63,7 +63,7 @@ task fatJar(type: Jar) {
 
 task exportJar(type: Jar) {
     archiveBaseName = 'gdx-mapcreator'
-    archiveVersion = '1.0.0'
+    archiveVersion = version
 
     from sourceSets.main.output
     include '**/*.class'
