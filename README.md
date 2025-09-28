@@ -7,6 +7,11 @@ To get started, you need to make sure that you have imported the following:
 2) com.badlogicgames.gdx:gdx-box2d,
 3) com.badlogicgames.gdx:gdx
 
+Un current moment following versions of libraries/frameworks are supported:
+- Box2d - 1.13.1
+- Gdx - 1.13.1
+- Ashley - 1.7.4
+
 Also - please check your .tmx or .tsx files for the presence of fields where the "Class" field is present. It needs to be replaced with the "type" field, since due to the peculiarities of LibGDX, the "class" field is simply not parsed.
 To replace all "class" with "type" at once, you can use this simple code:
 ```
