@@ -155,8 +155,9 @@ public class MapContactListener implements ContactListener {
     /**
      * Handles the start of communication between two objects.
      *
-     * @param entityA   the first contact object
-     * @param entityB   the second contact object
+     * @param contact The class manages contact between two shapes. {@link Contact}
+     * @param entityA the first contact object
+     * @param entityB the second contact object
      * @param userDataA user data of the first object
      * @param userDataB user data of the second object
      */

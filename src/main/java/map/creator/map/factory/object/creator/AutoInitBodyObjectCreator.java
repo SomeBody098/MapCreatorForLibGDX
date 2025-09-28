@@ -62,12 +62,8 @@ public abstract class AutoInitBodyObjectCreator implements ObjectCreator{
 
     private final BodyParamFactory bodyParamFactory;
 
-    public AutoInitBodyObjectCreator() {
-        bodyParamFactory = new BodyParamFactory();
-    }
-
-    public AutoInitBodyObjectCreator(String nameBodyParamJson) {
-        bodyParamFactory = new BodyParamFactory(nameBodyParamJson);
+    public AutoInitBodyObjectCreator(BodyParamFactory bodyParamFactory) {
+        this.bodyParamFactory = bodyParamFactory;
     }
 
     public abstract ObjectEntity createObject(String nameBody, MapProperties properties, Map<String, MapProperties> dataObjects, float unitScale, Body body);

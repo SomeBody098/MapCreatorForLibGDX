@@ -29,6 +29,7 @@ public class BodyFactoryDebugger {
 
     /**
      * Setting debug mode.
+     * @param debug bool value
      */
     public void setDebug(boolean debug) {
         this.isDebug = debug;

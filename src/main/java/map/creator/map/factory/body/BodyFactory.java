@@ -112,6 +112,7 @@ public class BodyFactory {
 
     /**
      * Setting debug mode.
+     * @param debug bool value
      */
     public void setDebug(boolean debug) {
         debugger.setDebug(debug);
@@ -119,6 +120,7 @@ public class BodyFactory {
 
     /**
      * Gets the scale of the conversion.
+     * @return the current unit scale
      */
     public float getUnitScale() {
         return unitScale;
